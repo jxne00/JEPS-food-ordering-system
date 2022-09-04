@@ -1,0 +1,76 @@
+﻿@model SetMeal;
+
+@section MoreScripts {
+    <script src="~/lib/moment/moment.min.js"></script>
+}
+
+    <form asp-controller="Menu"
+          asp-action="EditMeal"
+          method="post">
+
+        <br />
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-5">
+                <h2><b>Update Set Meal</b></h2>
+            </div>
+        </div>
+
+        <input asp-for="Set_meal_id" hidden />
+
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-5">
+                <img id="ImgPhoto" src="/Images/Menu/@Model.Set_meal_picture" style="width:400px;" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="Set_meal_description">Meal Name :</label>
+            <div class="col-sm-5">
+                <input type="text" asp-for="Set_meal_description" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <span asp-validation-for="Set_meal_description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="Menu_itemid1">Menu Item 1 ID :</label>
+            <div class="col-sm-5">
+                <input type="text" asp-for="Menu_itemid1" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="Menu_itemid2">Menu Item 2 ID :</label>
+            <div class="col-sm-5">
+                <input type="text" asp-for="Menu_itemid2" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="Set_meal_price">Price :</label>
+            <div class="col-sm-5">
+                <input type="text" asp-for="Set_meal_price" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <span asp-validation-for="Set_meal_price" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-5">
+                <input type="submit" value="Update" class="btn btn-primary" /><br />
+            </div>
+        </div>
+
+        @if (ViewData["Message"] != null)
+        {
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-5">
+                    <div class="alert alert-@ViewData["MsgType"]">
+                        <text>@ViewData["Message"]</text>
+                    </div>
+                </div>
+            </div>
+        }
+    </form>

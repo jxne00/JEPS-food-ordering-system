@@ -1,0 +1,100 @@
+﻿@model List<SetMeal>
+
+@section MoreScripts {
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsMealTable').DataTable({
+                ordering: true,
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: true,
+                lengthMenu: [[6, 10, 20, -1], [6, 10, 20, "All"]]
+            });
+        });
+    </script>
+}
+
+<br />
+<h2 style="text-align: center"><b>Set Meals</b></h2>
+@if (User.IsInRole("A"))
+{
+    <b><a href="/Menu/CreateMeal">Create a new Set Meal</a></b>
+    <br />
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<table id="jsMealTable" class="table table-condensed table-hover table-bordered" style="border:double">
+    <thead>
+        <tr style="background-color:navajowhite">
+            <th scope="col">ID</th>
+            <th scope="col">Meal Name</th>
+            <th scope="col">Menu Item 1 ID</th>
+            <th scope="col">Menu Item 2 ID</th>
+            <th scope="col">Price</th>
+            <th scope="col">Photo</th>
+            @if (User.IsInRole("A"))
+            {
+                <th scope="col">Action</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (SetMeal setmeal in Model)
+        {
+            <tr>
+                <td>@setmeal.Set_meal_id</td>
+
+                <td><a href="/Menu/SetDetails/@setmeal.Set_meal_id">@setmeal.Set_meal_description</a></td>
+
+                <td>@setmeal.Menu_itemid1</td>
+
+                <td>@setmeal.Menu_itemid2</td>
+
+                @*<td>@setmeal.Menu_itemDescription</td>
+
+                    <td>@setmeal.Menu_itemDescription</td>*@
+
+                <td>
+                    @String.Format("{0:c}", @setmeal.Set_meal_price)
+                </td>
+
+                <td>
+                    <img src="/images/menu/@setmeal.Set_meal_picture" width="100" />
+                </td>
+
+                @if (User.IsInRole("A"))
+                {
+                    <td>
+                        <a asp-controller="Menu" asp-action="EditMeal"
+                           asp-route-id="@setmeal.Set_meal_id">Edit</a>
+                        |
+                        <a asp-controller="Menu" asp-action="DeleteMeal"
+                           asp-route-id="@setmeal.Set_meal_id"
+                           onclick="return confirm('Are you sure you want to delete @setmeal.Set_meal_description?')">
+                            Delete
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<td>
+        <a href="/Organic/ProductEdit/@setmeal["OrgCode"]">
+            <i class="fa fa-pencil"></i>
+        </a>
+        |
+        <a href="/Organic/ProductDelete/@setmeal["OrgCode"]"
+        </a>
+    </td>*@

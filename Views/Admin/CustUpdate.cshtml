@@ -1,0 +1,70 @@
+﻿@model CustomerDetails
+
+<form asp-controller="Admin"
+      asp-action="CustUpdate"
+      method="post">
+<br/>
+<div>
+    <div class="col-sm-1 col-sm-6">
+        <h2>
+            <b class="offset-sm-1">Update Personal Information</b>
+        </h2>
+    </div>
+    
+
+</div>
+  
+<div class="form-group row">
+    <label class="control-label col-sm-2" for="UserEmail">Email Address:</label>
+    <div class="col-sm-4">
+        <input type="text" asp-for="UserEmail" class="form-control" readonly/>
+    </div>
+</div>
+  
+<div class="form-group row">
+    <label class="control-label col-sm-2" for="CustomerNo">Phone Number :</label>
+    <div class="col-sm-4">
+        <input type="text" asp-for="CustomerNo" class="form-control" />
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="control-label col-sm-2" for="Date_of_birth">BirthDate :</label>
+    <div class="col-sm-4">
+        <input type="text" asp-for="Date_of_birth" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="control-label col-sm-2" for="Customer_Address">Address :</label>
+    <div class="col-sm-4">
+        <input type="text" asp-for="Customer_Address" class="form-control" />
+    </div>
+</div>
+
+<div class="offset-sm-2 col-sm-4">
+    <h5>
+        @if (User.IsInRole("A"))
+        {
+            <a asp-controller="Admin" asp-action="Customer"><input type="submit" class="btn btn-warning fa" value="Update Information" /></a>
+
+        }
+    </h5>
+</div>
+
+
+@if (ViewData["Message"] != null)
+{
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <div class="alert alert-@ViewData["MsgType"]">
+                <text>@Html.Raw(ViewData["Message"])</text>
+            </div>
+        </div>
+    </div>
+}
+
+    </form>
+
+
+

@@ -1,0 +1,93 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+</style>
+
+<br />
+<h2 style="text-align:center"><u><b>Most popular set meal of the month</b></u></h2>
+<canvas id="canvas1" width="1100" height="500" class="center"></canvas>
+
+
+<script>
+    $(document).ready(function () {
+        var options = {
+            legend: true,
+            responsive: true
+        };
+        new Chart($("#canvas1"), {
+            type: 'pie',
+            tooltipFillColor: "rgba(51, 51, 51)",
+
+            data: {
+                labels: [
+                    "Chicken Burger with Apple Pie",
+                    "Fish Burger with Iced Lemon Tea",
+                    "Drumlets with Coke",
+                    "Salad with Water",
+                    "Ebi Burger with Strawberry Ice Cream",
+                    "Chicken Nuggets with Oreo Cheesecake",
+                    "2 pc Chicken with Orange Juice",
+                    "Cheesecake with Hot Tea",
+                    "Onion Rings with Hot Coffee",
+                    "Cheeseburger with Vanilla Ice Cream",
+                    "Chicken Wrap with Chocolate Ice Cream",
+                    "Fish Sandwich with Fries",
+                    "Red Velvet Cake with Sprite",
+                    "Chocolate Cake with Iced Milo"
+
+
+                ],
+                datasets: [{
+                    data: [8, 1, 3, 6, 10, 15, 1, 5, 1, 1, 7, 1, 4, 2],
+                    backgroundColor: [
+                        "#B85480",
+                        "#23B282",
+                        "#D84B7A",
+                        "#87ADDE",
+                        "#D8A84B",
+                        "#D8624B",
+                        "#FFB600",
+                        "#8FBC8B",
+                        "#8B8FBC",
+                        "#96585D",
+                        "#AFD947",
+                        "#BBA0FF",
+                        "#FDFF73",
+                        "#B0B21B"
+
+                    ],
+                    hoverBackgroundColor: [
+                        "#DE87AD",
+                        "#4BD8A9",
+                        "#FE7EA9",
+                        "#C1DCFF",
+                        "#FED37E",
+                        "#D87A4B",
+                        "#FFC126",
+                        "#CBE2C9",
+                        "#C9CBE2",
+                        "#BC8B8F",
+                        "#D9FF7A",
+                        "#D6C6FF",
+                        "#FEFF99",
+                        "#D6D841"
+
+                    ]
+
+                }]
+            },
+
+            options: { responsive: false }
+
+        });
+
+    });
+</script>
+

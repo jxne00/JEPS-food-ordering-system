@@ -1,0 +1,70 @@
+﻿<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <ul class="nav navbar-nav mr-auto">
+
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" style="color:whitesmoke"
+               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                View Menu
+            </a>
+
+            <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/Menu/ListMeal">View Set Meals</a>
+                <a class="dropdown-item" href="/Menu/ListMenu">View Menu Items</a>
+            </div>
+        </li>
+
+        <!-- Customer Navigation bar layout -->
+        <content class="navbar-toggler" type="button"
+                 data-toggle="collapse" data-target="#navbarSupportedContent"
+                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </content>
+
+        <!--VIEW ORDERS OF THE DAY-->
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Order" asp-action="TodayOrder" style="color:whitesmoke">Orders of the day</a>
+        </li>
+
+        <!--ORDER HISTORY-->
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Order" asp-action="OrderHistoryIndex" style="color:whitesmoke">Order History</a>
+        </li>
+
+        <!--UPDATE ORDER STATUS-->
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Order" asp-action="OrderStatusIndex" style="color:whitesmoke">Update Order Status</a>
+        </li>
+
+        <!--STOP & START ONLINE ORDERS-->
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" style="color:whitesmoke"
+               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Manage Online Order
+            </a>
+
+            <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/Account/UpdateStopLogin">Stop Accepting Orders</a>
+                <a class="dropdown-item" href="/Account/ContinueLogin">Continue Accepting Orders</a>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav ml-auto">
+        <content>
+            <a class="navbar-text" style="color:gainsboro">
+                <i>Welcome</i>, <b>@User.Identity.Name </b>
+            </a>
+        </content>
+        
+        <content>
+            <a class="nav-link" asp-controller="Account" asp-action="Logoff">
+                <i class="fa fa-sign-out"></i>
+                Logout
+            </a>
+        </content>
+        <li>
+            &nbsp;&nbsp;&nbsp;
+        </li>
+    </ul>
+    
+</nav>

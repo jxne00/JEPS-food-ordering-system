@@ -1,0 +1,107 @@
+﻿@model Orders;
+
+
+<form asp-controller="Order"
+      asp-action="AdvanceOrder"
+      method="post">
+
+    <div class="container">
+
+        <div class="form-group row">
+            <div class="col-sm-14" style="vertical-align:middle; text-align:left;">
+                <p style="color:red"><strong>Please rectify your delivery details.</strong></p>
+            </div>
+        </div>
+
+        <input type="text" asp-for="Customer_id" hidden />
+        <div class="form-group row">
+            <label class="control-label col-sm-2" asp-for="Customer_id"> Delivery Address :</label>
+            <div class="col-sm-4">
+                <input type="text" asp-for="Customer_Address" class="form-control" readonly />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" asp-for="Order_Date">Order Date :</label>
+            <div class="col-sm-4 from-control-static">
+                <input type="date" asp-for="Order_Date" placeholder="Enter date in DD-MM-YYYY Format" asp-format="{0:dd/MM/yyyy}" class="form-control" />
+            </div>
+            <div class="col-sm-3">
+                <span asp-validation-for="Order_Date" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" asp-for="Order_Time">Order Time :</label>
+                <div class="col-sm-4 from-control-static">
+                    <input type="text" asp-for="Order_Time" placeholder="Enter in 24 hours format" class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <span asp-validation-for="Order_Time" class="text-danger"></span>
+                </div>
+            </div>
+            @*<div class="col-sm-4 from-control-static">
+            <input type="time" asp-for="Order_Time" asp-format="{0:HH-mm tt}" class="form-control" />
+        </div>*@
+            @*<div class="col-sm-4">
+        <div class="input-group date" id="JSDateTime" data-target-input="nearest">
+            <input type="text" name="DateTime" class="form-control" />
+            <div class="input-group-append" data-target="#JSDateTime" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>*@
+            @*<div class="col-sm-5">
+        <div class="form-check form-check-inline">
+            <input type="radio" id="ordernow" name="Order Time" value="HH:mm tt" class="form-check-input" />
+            <label class="form-check-label" for="ordernow"> Order Now</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input type="radio" id="advanceorder" name="Order Time" value="HH:mm tt" class="form-check-input" />
+            <label class="form-check-label" for="advanceorder"> Order in Advance</label>
+                <input type="time" placeholder="Enter your order timing" asp-for="Order_Time" class="form-control" />
+                <div class="col-sm-3">*@
+            @*</div>*@
+
+                @*<div class="form-group row">
+                <label class="control-label col-sm-2" asp-for="Order_Time">Order Time :</label>
+                <div class="col-sm-4">
+                    <select id="Order_id" name="Refer" class="form-control">
+                        <option selected="selected" value="Order_Time.Now">Now</option>
+                        <option value="Order_Time.20:15:00">08:15 PM</option>
+                        <option value="Order_Time.20:30:00">08:30 PM</option>
+                        <option value="Order_Time.20:45:00">08:45 PM</option>
+                        <option value="Order_Time.21:00:00">09:00 PM</option>
+                        <option value="Order_Time.21:15:00">09:15 PM</option>
+                        <option value="Order_Time.20:30:00">09:30 PM</option>
+                        <option value="Order_Time.20:45:00">09:45 PM</option>
+                        <option value="Order_Time.22:00:00">10:00 PM</option>
+                        <option value="Order_Time.22:15:00">10:15 PM</option>
+                        <option value="Order_Time.22:30:00">10:30 PM</option>
+                        <option value="Order_Time.22:45:00">10:45 PM</option>
+                        <option value="Order_Time.23:00:00">11:00 PM</option>
+                    </select>
+                    <div class="col-sm-3">
+                        <span asp-validation-for="Order_Time" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>*@
+
+                <div class="offset-sm-4 col-sm-6">
+                    <h5>
+                        @if (User.IsInRole("C"))
+                        {
+                            <input type="submit" class="btn btn-warning red" value="Proceed to Order" />
+
+                        }
+                    </h5>
+                </div>
+
+                @if (ViewData["Message"] != null)
+                {
+                    <div class="form-group row">
+                        <div class="alert alert-@ViewData["MsgType"]">
+                            <text>@ViewData["Message"]</text>
+                        </div>
+                    </div>
+                }
+    </div>
+</form>  

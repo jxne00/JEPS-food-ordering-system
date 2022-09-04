@@ -1,0 +1,98 @@
+﻿@using System.Data;
+
+@model DataRowCollection
+<!--Index links to View order History-->
+
+
+@section MoreScripts {
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsOrderTable').DataTable({
+                ordering: true,
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: false,
+                "language": {
+                    "emptyTable": "No orders available"
+                }
+
+            });
+        });
+    </script>
+
+}
+
+
+<br />
+<div style="text-align:center">
+    <h2><b>ORDER HISTORY</b></h2>
+</div>
+<hr />
+
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+<table id="jsOrderTable" class="table table-condensed table-hover table-bordered" style="border:double">
+
+    <thead style="text-align:center">
+        <tr style="background-color:navajowhite">
+            <th scope="col">Order ID</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Order Time</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col">Total price</th>
+            <th scope="col">Customer's Email</th>
+            <th scope="col">Status</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (DataRow ord in Model)
+        {
+            <tr style="text-align:center;">
+
+                <td>@ord["Order_id"]</td>
+                <td>@String.Format("{0:dd MMM yyyy}", ord["Order_Date"])</td>
+                @*<td>@String.Format("{0:hh:mm tt}", ord["Order_Time"])</td>*@
+                <td>@ord["Order_Time"]</td>
+                <td>@ord["Quantity"]</td>
+                <td>@String.Format("{0:C}", ord["Order_price"])</td>
+                <td>@String.Format("{0:C}", ord["TotalPrice"])</td>
+                <td><a asp-controller="Customer" asp-action="CustOrderList" asp-route-id="@ord["UserEmail"]">@ord["UserEmail"]</a></td>
+
+                <td align="center">
+                    @if (ord["Order_Status"].Equals("Delivered"))
+                    {
+                        <b style="color:red">@ord["Order_Status"]  </b>
+                        <b><i style="color:red" class="fa fa-check"></i></b>
+                    }
+                    else
+                    {
+                        <b>@ord["Order_Status"]</b>
+                    }
+                </td>
+
+
+
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+<br />
+
+
+
+

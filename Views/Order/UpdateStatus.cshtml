@@ -1,0 +1,72 @@
+﻿@model Order
+
+@section MoreScripts {
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+}
+
+
+    <form asp-controller="Order"
+          asp-action="UpdateStatus"
+          method="post">
+
+        <br />
+        <input type="text" asp-for="Order_id" hidden />
+        <input type="text" asp-for="Order_Date" hidden />
+        <input type="text" asp-for="Order_Time" hidden />
+        <input type="text" asp-for="Order_price" hidden />
+        <input type="text" asp-for="UserEmail" hidden />
+
+        <h4 style="text-align:center">
+            <b>Updating Order Status for Order ID<u> @Model.Order_id </u></b>
+        </h4>
+
+
+        <hr />
+        <br />
+
+        <div class="offset-sm-4">
+            <i>(Current Order Status is  <b><u>@Model.Order_Status.ToUpper()</u></b>)</i>
+        </div>
+
+
+        <div class="form-group row" style="text-align:center">
+            <label for="Order_Status" class="control-label offset-sm-4"><b>Order Status :</b></label>
+            <div class="col-sm-3">
+                <select id="Order_status" name="Order_Status" class="form-control">
+                    <option value="">- - - - SELECT STATUS - - - -</option>
+                    <option value="Preparing">Preparing</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Delivering">Delivering</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <br />
+
+        <div class="form-group row">
+            <div class="offset-sm-4 col-sm-5">
+                <input type="submit" value="Update" class="btn btn-primary"
+                       onclick='return confirm("Are you sure you want to update the Order Status?")' />
+            </div>
+        </div>
+        <h5 class="offset-sm-3"><a href="OrderStatusIndex">Back</a></h5>
+
+        @if (ViewData["Message"] != null)
+        {
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-6">
+                    <div class="alert alert-@ViewData["MsgType"]">
+                        @ViewData["Message"]
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+    </form>
+

@@ -1,0 +1,99 @@
+﻿<br />
+<div class="col-sm-12" style="vertical-align:middle; text-align: center;">
+    <img src="~/images/welcome.png" width="270" height="110" />
+</div>
+
+<hr />
+
+<div class="col-sm-12" style="vertical-align:middle; text-align: center;">
+    <h3><b><span style="color:midnightblue">You are now logged in as <u style="color:firebrick">@User.Identity.Name</u></span></b></h3>
+</div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("C"))
+    {
+        <p>
+            <div style="border:double; box-shadow: 10px 10px 5px grey; background-color:lightgray; text-align:center ">
+                <h4><b>SHORTCUTS :</b></h4>
+
+                <h5>
+                    <a class="button" asp-controller="Customer" asp-action="AllDetails">
+                        <b>View Profile</b>
+                    </a>
+                    <br />
+
+                    <a class="button" asp-controller="Order" asp-action="OrderHistory">
+                        <b>View Order History</b>
+                    </a>
+                    <br />
+                    <a class="button" asp-controller="Order" asp-action="AdvanceOrder">
+                        <b>Place Order</b>
+                    </a>
+                    <br />
+                    <a class="button" asp-controller="PromoSample" asp-action="CustPromo">
+                        <b>View Promotions</b>
+                    </a>
+
+
+                </h5>
+            </div>
+        </p>
+    }
+
+    else if (User.IsInRole("S"))
+    {
+        <p>
+            <div style="border:double; box-shadow: 10px 10px 5px grey; background-color:lightgray; text-align:center ">
+                <h4><b>SHORTCUTS :</b></h4>
+
+                <h5>
+                    <a class="button" asp-controller="Order" asp-action="TodayOrder">
+                        <b>View Orders of the day</b>
+                    </a>
+                    <br />
+
+                    <a class="button" asp-controller="Order" asp-action="OrderHistoryIndex">
+                        <b>View Order History</b>
+                    </a>
+                    <br />
+                    <a class="button" asp-controller="Order" asp-action="OrderStatusIndex">
+                        <b>Update Order Status</b>
+                    </a>
+                    <br />
+                </h5>
+            </div>
+        </p>
+    }
+
+    else
+    {
+        <p>
+            <div style="border:double; box-shadow: 10px 10px 5px grey; background-color:lightgray; text-align:center ">
+                <h4><b>SHORTCUTS :</b></h4>
+
+                <h5>
+                    <a class="button" asp-controller="Admin" asp-action="Users">
+                        <b>View Users</b>
+                    </a>
+                    <br />
+
+                    <a class="button" asp-controller="Admin" asp-action="Users">
+                        <b>View Customers</b>
+                    </a>
+                    <br />
+                    <a class="button" asp-controller="Menu" asp-action="Customer">
+                        <b>View Meal sets</b>
+                    </a>
+                    <br />
+                    <a class="button" asp-controller="PromoSample" asp-action="Sample">
+                        <b>View Promotions</b>
+                    </a>
+                    <br />
+                </h5>
+            </div>
+        </p>
+    }
+
+
+}

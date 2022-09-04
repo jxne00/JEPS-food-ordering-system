@@ -1,0 +1,105 @@
+﻿<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              
+        <ul class="navbar-nav mr-auto">
+            @*<li class="nav-item dropdown">
+                <a href="#" class="navbar-brand nav-link dropdown-toggle" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cutlery"> MENU</i>
+                </a>
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Menu/ListMeal">View Set Meals</a>
+                    <a class="dropdown-item" href="/Menu/ListMenu">View Menu Items</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Menu/CreateMeal">Create Set Meal</a>
+                    <a class="dropdown-item" href="/Menu/CreateMenu">Create Menu Item</a>
+                </div>
+            </li>*@
+
+            <li class="nav-item dropdown"  style="color:whitesmoke">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"  style="color:whitesmoke"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage Users
+                </a>
+
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Admin/Users">View All</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Admin/UserRegister">Create Users</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"  style="color:whitesmoke"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage Customers
+                </a>
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Admin/Customer">View All</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Account/Register">Create Customers</a>
+                </div>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"  style="color:whitesmoke"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage Menu
+                </a>
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Menu/ListMenu">View Menu Items</a>
+                    <a class="dropdown-item" href="/Menu/CreateMenu">Create Menu Item</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/Menu/ListMeal">View Set Meals</a>
+                    <a class="dropdown-item" href="/Menu/CreateMeal">Create Set Meal</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"  style="color:whitesmoke"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage Promotion
+                </a>
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/PromoSample/Sample">View Promotion Codes</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/PromoSample/AddPromo">Add Promotion Code</a>
+                    <a class="dropdown-item" href="/Account/SendBirthdayEmail">Email Birthday Discount Code</a>
+                    <a class="dropdown-item" href="/Account/SendEmail">Email Promotion Code</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"  style="color:whitesmoke"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reports
+                </a>
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Graph/MostSpendings">Most spending amount</a>
+                    <a class="dropdown-item" href="/Graph/MostOrderMade">Most orders made</a>
+                    <a class="dropdown-item" href="/Graph/SetMeal">Most popular meal set</a>
+                    <a class="dropdown-item" href="/Graph/SideDish">Most popular side dish</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav ml-auto">
+            <content>
+                <a class="navbar-text" style="color:gainsboro">
+                    <i>Welcome</i>, <b>@User.Identity.Name </b>
+                </a>
+            </content>
+            <content>
+                <a class="nav-link" asp-controller="Account" asp-action="Logoff">
+                    <i class="fa fa-sign-out"></i>
+                    Logout
+                </a>
+            </content>
+            <li>
+                &nbsp;&nbsp;&nbsp;
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,69 @@
+﻿@model CustomerDetails
+
+<div style="justify-content:center">
+    <div class="col-sm-1 col-sm-6">
+        <h2 style="margin-bottom:5px">
+            <img style="border-radius:50% ;margin-bottom:40px" src="~/images/profile.png" width="100" height="100" />
+            &nbsp;&nbsp;
+            <b style="font-family:'Comic Sans MS'">Personal Information</b>
+        </h2>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Userid">E-mail :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="UserEmail" class="form-control" style="background-color:gainsboro" readonly />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="CustomerNo">Phone Number :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="CustomerNo" class="form-control" style="background-color:gainsboro" readonly />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Date_of_birth">BirthDate :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Date_of_birth" asp-format="{0:yyyy-MM-dd}" class="form-control" style="background-color:gainsboro" readonly />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Customer_Address">Address :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Customer_Address" class="form-control" style="background-color:gainsboro" readonly />
+        </div>
+    </div>
+
+
+    <div class="offset-sm-4 col-sm-6">
+        <h5>
+            @if (User.IsInRole("C"))
+            {
+                <a asp-controller="Customer" asp-action="CustUpdate"><input type="submit" class="btn btn-warning fa" value="Edit Information" /></a>
+
+            }
+        </h5>
+    </div>
+    <br />
+    <a asp-controller="Customer" asp-action="AllDetails"> <u>View All Details</u> </a>
+</div>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <div class="alert alert-@ViewData["MsgType"]">
+                <text>@Html.Raw(ViewData["Message"])</text>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+

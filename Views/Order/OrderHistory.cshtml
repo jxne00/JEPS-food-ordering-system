@@ -1,0 +1,93 @@
+﻿@{
+    // TODO: L11 Task 5b - Include DataTables CSS and JS, write code to make the table searchable and sortable
+}
+@section MoreScripts {
+
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsTblOrd').DataTable({
+                ordering: true,
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: false,
+                pageLength: 10,
+                "language": {
+                    "emptyTable": "No orders have been made"
+                }
+            });
+        });
+    </script>
+}
+
+
+@model DataRowCollection
+
+<div class="col-sm-12" style="vertical-align:middle; text-align: center;">
+    <p><h2><b><span style="color:black">Order History</span></b></h2></p>
+</div>
+
+@if (TempData["Message"] != null)
+{ 
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<div>
+
+    @{
+        // TODO: L11 Task 5a - Give the Table an ID to be used with DataTables
+    }
+    <table id="jsTblOrd" class="table table-condensed table-hover table-bordered" style="border:double">
+        <thead style="text-align:center">
+            
+            <tr style="background-color:navajowhite">
+                <th scope="col">Order ID</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Order Time</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Status</th>
+                <th scope="col">Total Price</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (DataRow ord in Model)
+            { 
+            <tr style="background-color:none">
+                <td style="text-align: center;">@ord["Order_id"]</td>
+                <td style="text-align: center;">@String.Format("{0:dd-MM-yyyy}", ord["Order_Date"])</td>
+                @*<td style="text-align: center;">@String.Format("{0:hh:mm tt}", ord["Order_Time"])</td>*@
+                <td style="text-align: center;">@ord["Order_Time"]</td>
+                <td style="text-align: center;">@ord["Quantity"]</td>
+                <td style="text-align: center;">
+                    @if (ord["Order_Status"].Equals("Delivered"))
+                    {
+
+                        <b style="color:red"><text>Past Order</text></b>
+
+                    }
+                    else
+                    {
+
+                        <b style="color:green"><text>Pending Order</text></b>
+
+                    }
+                </td>
+                <td style="text-align: center; color:blue"><b>@String.Format("{0:C}", ord["TotalPrice"])</b></td>
+
+
+
+            </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+

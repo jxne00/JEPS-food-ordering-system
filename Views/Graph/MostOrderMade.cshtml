@@ -1,0 +1,154 @@
+﻿@using System.Data
+@model DataRowCollection
+
+@section MoreScripts {
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsOrderTable').DataTable({
+                ordering: false,
+                paging: false,
+                searching: true,
+                info: false,
+                lengthChange: false
+
+            });
+        });
+    </script>
+}
+@*
+    <br />
+    <div style="text-align:center">
+        <h2><b>Customer with most orders made</b></h2>
+
+    </div>
+
+    <hr />
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-@TempData["MsgType"]">
+            @TempData["Message"]
+        </div>
+    }
+
+    Current month(MM-YYYY):<b> @DateTime.Now.Month.ToString()-@DateTime.Now.Year.ToString()</b>
+
+    <table id="jsOrderTable" class="table table-condensed table-hover table-bordered" style="border:double">
+        <thead style="text-align:center">
+            <tr style="background-color:gainsboro">
+
+                <th scope="col">Customer</th>
+                <th scope="col">Number of orders made this month</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (DataRow row in Model)
+            {
+                <tr style="text-align:center;background-color:white">
+                    <td>@row["UserEmail"] </td>
+                    <td>@row["Order_id"] </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <hr />*@
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+</style>
+
+<br />
+<h2 style="text-align:center"><b>Customer with most orders made</b></h2>
+<canvas id="canvas1" width="600" height="500" class="center"></canvas>
+
+
+<script>
+    $(document).ready(function () {
+        var options = {
+            legend: true,
+            responsive: true
+        };
+        new Chart($("#canvas1"), {
+            type: 'pie',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+
+            data: {
+                labels: [
+                    "customer3@fyp.com",
+                    "danny@fyp.com",
+                    "john@fyp.com",
+                    "customer@fyp.com",
+                    "customer2@fyp.com",
+                    "amy@fyp.com",
+                    "amanda@fyp.com",
+                    "jenny@fyp.com",
+                    "sofia@fyp.com",
+                    "customer4@fyp.com"
+
+                ],
+                datasets: [{
+                    data: [4, 3, 3, 3, 2, 1, 3, 2, 1, 2],
+                    backgroundColor: [
+                        "#3498DB",
+                        "#9B59B6",
+                        "#E74C3C",
+                        "#26B99A",
+                        "#DB7093",
+                        "#708090",
+                        "#96585D",
+                        "#AFD947",
+                        "#BBA0FF",
+                        "#FDFF73"
+                    ],
+                    hoverBackgroundColor: [
+                        "#49A9EA",
+                        "#B370CF",
+                        "#E95E4F",
+                        "#36CAAB",
+                        "#FFC0CB",
+                        "#C0C0C0",
+                        "#BC8B8F",
+                        "#D9FF7A",
+                        "#D6C6FF",
+                        "#FEFF99"
+
+                    ],
+                    fill: false
+
+                }]
+            },
+
+            options: {
+                responsive: false,
+                legend: {
+                    display: true
+                },
+
+                title: {
+                    display: true,
+                    text: ["Customer's Email"]
+                }
+            }
+        });
+    });
+</script>
+
+
+
+
+

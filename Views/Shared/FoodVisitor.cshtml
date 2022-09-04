@@ -1,0 +1,45 @@
+﻿<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav mr-auto">
+            
+            <li class="nav-item dropdown">
+                <a href="#" class="navbar-brand nav-link dropdown-toggle" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cutlery" style="color:white"> MENU</i>
+                </a>
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Menu/SetMeals">Set Meals</a>
+                    <a class="dropdown-item" href="/Menu/AlaCarte">Ala Carte</a>
+                    <a class="dropdown-item" href="/Menu/Sides">Sides</a>
+                    <a class="dropdown-item" href="/Menu/Desserts">Desserts</a>
+                    <a class="dropdown-item" href="/Menu/Drinks">Drinks</a>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="About" style="color:whitesmoke">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="Contactus" style="color:whitesmoke">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="Register" style="color:whitesmoke" >Register as Customer</a>
+            </li>
+        </ul>
+
+
+
+        <ul class="nav navbar-nav ml-auto">
+            <content>
+                <a class="nav-link" asp-controller="Account" asp-action="Login">
+                    <i class="fa fa-sign-in"></i>
+                    Login
+                </a>
+            </content>
+
+            &nbsp;&nbsp;&nbsp;
+
+        </ul>
+    </div>
+
+</nav>

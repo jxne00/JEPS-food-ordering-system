@@ -1,0 +1,85 @@
+﻿@model Menu
+
+<div class="container">
+    <br />
+
+    <div class="form-group row">
+        <div class="col-sm-12" style="vertical-align:middle; text-align: center;">
+            <h2><b><span style="color:midnightblue">PLACE ORDER</span></b></h2>
+        </div>
+    </div>
+
+    <!--Display the menu item photo-->
+    <h2><b>@Model.Menu_itemDescription</b></h2>
+    <div class="col-sm-1 col-sm-6">
+        <img src="/images/menu/@Model.Menu_itemPicture" width="200" height="200" />
+    </div>
+
+    <br />
+    <input type="text" asp-for="Menu_itemid" hidden />
+    <input type="text" asp-for="Menu_itemDescription" hidden />
+    <input type="text" asp-for="Menu_itemPicture" hidden />
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Menu_itemPrice">Price :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Menu_itemPrice" class="form-control" readonly />
+        </div>
+    </div>
+
+    @*<div class="form-group row">
+            <label class="control-label col-sm-2" asp-for="Quantity">Quantity :</label>
+            <div class="col-sm-4">
+                <select id="Order_detail_id" name="Refer" class="form-control">
+                    <option value="">--- SELECT QUANTITY ---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+        </div>*@
+</div>
+
+<form method="post"
+      action="/Order/Create">
+
+    <div class="offset-sm-4 col-sm-6">
+        @if (User.IsInRole("C"))
+        {
+            <input type="submit" class="btn btn-warning" value="Select Quantity" />
+        }
+    </div>
+</form>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="form-group row">
+        <div class="alert alert-@ViewData["MsgType"]">
+            <text>@ViewData["Message"]</text>
+        </div>
+    </div>
+}
+
+
+
+
+
+<br />
+
+
+
+
+
+
+
+

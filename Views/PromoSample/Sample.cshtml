@@ -1,0 +1,47 @@
+@model List<Promotion>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<br />
+<h2 class="col-sm-12" style="vertical-align:middle; text-align: center;"><u><b>Promotion Discounts</b></u></h2>
+<div class="row">
+    @foreach (Promotion row in Model)
+    {
+        <div class="col-sm-4">
+            <div class="card mt-2">
+                <div class="card-header" style="background-color:lemonchiffon">
+
+                    <b>   @row.Promotion_discount_Description</b>
+
+                </div>
+                <div class="card-body">
+                    <a asp-controller="PromoSample" asp-action="Sampleee" asp-route-id="@row.Promotion_discount_id">
+                        <img src="~/images/chance.jpg"
+                             width="150" height="100"
+                             class="pull-left" style="padding-right: 5px;" />
+                    </a>
+
+                    <small sstyle="vertical-align:middle; text-align: center;">
+                        <b> <u><text>Discount ID: @row.Promotion_discount_id</text></u></b>
+                    </small>
+                    <small class="pull-right" style="padding-right: 5px; padding-top: 5px">
+                        <a asp-controller="PromoSample"
+                           asp-action="SampleUpdate"
+                           asp-route-id="@row.Promotion_discount_id">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+
+                    </small>
+
+                </div>
+
+               
+            </div>
+        </div>
+    }
+</div>

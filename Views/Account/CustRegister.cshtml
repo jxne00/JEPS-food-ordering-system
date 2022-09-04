@@ -1,0 +1,94 @@
+@model VisitorRegistration
+@*<div style="border:solid; background-color:white;width:100px;height:100px">*@
+
+<form asp-controller="Account"
+      asp-action="Register"
+      method="post">
+    <br />
+
+
+    @if (User.IsInRole("A"))
+    {
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <br /> <h2><b>Create Customer Account</b></h2>
+            </div>
+        </div>
+    }
+
+    else
+    {
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <br /> <h2><b>Register As Customer</b></h2>
+            </div>
+        </div>
+    }
+
+
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="UserEmail">E-mail :</label>
+        <div class="col-sm-4">
+            <input type="text" placeholder="Enter your Email Address" asp-for="UserEmail" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="UserEmail" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_fullname">Full Name :</label>
+        <div class="col-sm-4">
+            <input type="text" placeholder="Enter your Fullname" asp-for="User_fullname" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_fullname" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_Password">Password :</label>
+        <div class="col-sm-4">
+            <input type="password" placeholder="Enter your Password" asp-for="User_Password" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_Password2">Re-enter Password :</label>
+        <div class="col-sm-4">
+            <input type="password" placeholder="Re-enter your Password to confirm" asp-for="User_Password2" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_Password2" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!--User type is automatically set to 'C' in controller-->
+    <!--Status is automatically set to 'Active' in controller-->
+    <!--Inactive_status is automatically set to 'N' in controller-->
+    <!--StopLogin is automatically set to 'N' in controller-->
+
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <input type="submit" value="Proceed" class="btn btn-info" /><a class="col-sm-2" href="Login">Already have an account?</a>
+        </div>
+
+    </div>
+
+
+    @if (ViewData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="alert alert-@ViewData["MsgType"]">
+                <text>@ViewData["Message"]</text>
+            </div>
+        </div>
+    }
+
+</form>
+

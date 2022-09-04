@@ -1,0 +1,71 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+</style>
+
+<br />
+<h2 style="text-align:center"><u><b>Most popular side dish of the month</b></u></h2>
+<canvas id="canvas1" width="800" height="500" class="center"></canvas>
+
+
+<script>
+    $(document).ready(function () {
+        var options = {
+            legend: true,
+            responsive: true
+        };
+        new Chart($("#canvas1"), {
+            type: 'pie',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55, 51, 0.55, 51, 0.55)",
+
+            data: {
+                labels: [
+                    "Vanilla Ice Cream",
+                    "Chocolate Ice Cream",
+                    "Strawberry Ice Cream",
+                    "Apple Pie",
+                    "Cheese Cake",
+                    "Oreo Cheesecake",
+                    "Red Velvet Cake",
+                    "Chocolate Cake"
+                ],
+                datasets: [{
+                    data: [2, 7, 10, 7, 9, 12, 7, 15],
+                    backgroundColor: [
+                        "#3498DB",
+                        "#9B59B6",
+                        "#E74C3C",
+                        "#26B99A",
+                        "#DEB887",
+                        "#DAA520",
+                        "#FFE4E1",
+                        "#F4A460"
+                    ],
+                    hoverBackgroundColor: [
+                        "#49A9EA",
+                        "#B370CF",
+                        "#E95E4F",
+                        "#36CAAB",
+                        "#FFE4C4",
+                        "#FFCC4C",
+                        "#FFF6EA",
+                        "#FFB67A"
+                    ]
+
+                }]
+            },
+
+            options: { responsive: false }
+
+        });
+
+    });
+</script>
+

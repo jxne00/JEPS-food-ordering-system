@@ -1,0 +1,60 @@
+﻿@model SetMeal
+
+<div>
+
+    <br />
+    <div class="form-group row">
+        <div class="offset-sm-2"><h2><b>@Model.Set_meal_description</b></h2></div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-5">
+            <img id="ImgPhoto" src="/Images/Menu/@Model.Set_meal_picture" style="width:400px;" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Menu_itemid1">Menu Item 1 :</label>
+        <div class="col-sm-5">
+            <input type="text" asp-for="Menu_itemid1" class="form-control" readonly />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Menu_itemid2">Menu Item 2 :</label>
+        <div class="col-sm-5">
+            <input type="text" asp-for="Menu_itemid2" class="form-control" readonly />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Set_meal_price">Price :</label>
+        <div class="col-sm-5">
+            <input type="text" asp-for="Set_meal_price" class="form-control" readonly />
+        </div>
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (User.IsInRole("C"))
+        {
+            <a asp-controller="Menu" asp-action="SetMeals"> <u> Back </u> </a>
+        }
+
+        else if (User.IsInRole("A"))
+        {
+            <a asp-controller="Menu" asp-action="ListMeal"> <u> Back </u> </a>
+        }
+
+        else if (User.IsInRole("S"))
+        {
+            <a asp-controller="Menu" asp-action="ListMeal"> <u> Back </u> </a>
+        }
+    }
+
+    else
+    {
+        <a asp-controller="Menu" asp-action="SetMeals"> <u> Back </u> </a>
+    }
+
+</div>

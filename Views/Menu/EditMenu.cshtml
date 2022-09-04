@@ -1,0 +1,78 @@
+﻿@model Menu;
+
+@section MoreScripts {
+    <script src="~/lib/moment/moment.min.js"></script>
+}
+
+    <form asp-controller="Menu"
+          asp-action="EditMenu"
+          method="post">
+
+        <br />
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-5">
+                <h2><b>Update Menu Item</b></h2>
+            </div>
+        </div>
+
+        <input asp-for="Menu_itemid" hidden />
+        @*<input type="text" asp-for="Menu_itemPicture" hidden />*@
+
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-5">
+                <img id="ImgPhoto" src="/Images/Menu/@Model.Menu_itemPicture" style="width:400px;" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="Menu_itemDescription">Item Name :</label>
+            <div class="col-sm-5">
+                <input type="text" asp-for="Menu_itemDescription" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <span asp-validation-for="Menu_itemDescription" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="Price">Price :</label>
+            <div class="col-sm-5">
+                <input type="text" asp-for="Menu_itemPrice" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <span asp-validation-for="Menu_itemPrice" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label class="control-label col-sm-2" asp-for="Menu_item_category_id">Category :</label>
+            <div class="col-sm-3">
+                <select class="form-control dropdown" id="GenreId" asp-for="Menu_item_category_id">
+                    @foreach (Category row in ViewData["Category"] as List<Category>)
+                    {
+                        <option value="@row.Menu_item_category_id"
+                                selected="@(row.Menu_item_category_id.Equals(Model.Menu_item_category_id))">
+                            @row.Menu_item_category_description.ToString()
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-5">
+                <input type="submit" value="Update" class="btn btn-primary" /><br />
+            </div>
+        </div>
+
+        @if (ViewData["Message"] != null)
+        {
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-5">
+                    <div class="alert alert-@ViewData["MsgType"]">
+                        <text>@ViewData["Message"]</text>
+                    </div>
+                </div>
+            </div>
+        }
+    </form>

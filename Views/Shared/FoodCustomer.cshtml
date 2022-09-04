@@ -1,0 +1,93 @@
+﻿<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="nav navbar-nav mr-auto">
+            
+            <li class="nav-item dropdown">
+                <a href="#" class="navbar-brand nav-link dropdown-toggle" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cutlery" style="color:white"> MENU</i>
+                </a>
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/Menu/SetMeals">Set Meals</a>
+                    <a class="dropdown-item" href="/Menu/AlaCarte">Ala Carte</a>
+                    <a class="dropdown-item" href="/Menu/Sides">Sides</a>
+                    <a class="dropdown-item" href="/Menu/Desserts">Desserts</a>
+                    <a class="dropdown-item" href="/Menu/Drinks">Drinks</a>
+                </div>
+            </li>
+
+
+            <!-- Customer Navigation bar layout -->
+            <content class="navbar-toggler" type="button"
+                     data-toggle="collapse" data-target="#navbarSupportedContent"
+                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </content>
+
+
+            <!--About Page-->
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="About" style="color:whitesmoke">About</a>
+            </li>
+
+            <!--Contact Us Page-->
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="Contactus" style="color:whitesmoke">Contact Us</a>
+            </li>
+
+            <!--Place Advance/Now Order-->
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Order" asp-action="AdvanceOrder" style="color:whitesmoke">Start Order</a>
+            </li>
+
+            <!--Order History-->
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Order" asp-action="OrderHistory" style="color:whitesmoke">Order History</a>
+            </li>
+
+            <!--Promo coupons-->
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="PromoSample" asp-action="CustPromo" style="color:whitesmoke">Promotions</a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav ml-auto">
+
+            <content>
+                <a class="nav-link" asp-controller="Order" asp-action="List">
+                    <i style="padding-left:2px;color:whitesmoke" class="fa fa-shopping-cart"></i>
+                </a>
+            </content>
+
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"  style="color:whitesmoke"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i>Welcome</i>, <b>@User.Identity.Name</b>
+                </a>
+                <!--Manage Personal Details dropdown-->
+                <div class="dropdown-content" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" style="text-align:center; font-family:'Franklin Gothic Medium', sans-serif" href="/Customer/AllDetails">View All</a>
+                    <div class="dropdown-divider" style="border-bottom:double"></div>
+                    <a class="dropdown-item" style="text-align:center" href="/Customer/AccountDetail"><i class="fa fa-user"></i> Manage Account Details</a>
+                    <a class="dropdown-item" style="text-align:center" href="/Customer/CustIndex"><i class="fa fa-user-circle"></i> Manage Personal Information</a>
+                </div>
+            </li>
+
+
+
+            <content>
+                <a class="nav-link" asp-controller="Account" asp-action="Logoff">
+                    <i class="fa fa-sign-out"></i>
+                    Logout
+                </a>
+            </content>
+            <li>
+                &nbsp;&nbsp;&nbsp;
+            </li>
+        </ul>
+            </div>
+</nav>
+
+
+

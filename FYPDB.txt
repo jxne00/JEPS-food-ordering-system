@@ -1,0 +1,236 @@
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Payment;
+DROP TABLE IF EXISTS Menu_item;
+DROP TABLE IF EXISTS Promotion_discount;
+DROP TABLE IF EXISTS Order_detail;
+DROP TABLE IF EXISTS Menu_item_category;
+DROP TABLE IF EXISTS Set_meal;
+
+
+CREATE TABLE Users (
+   UserEmail		VARCHAR(45) PRIMARY KEY,
+   User_fullname	VARCHAR(45) NOT NULL,
+   User_Password	VARCHAR(45) NOT NULL,
+   User_type		CHAR(1) NOT NULL,
+   Status                            VARCHAR(45) NULL,
+  Inactive_status             CHAR(1) NULL,
+   LastLogin		DATETIME NULL,
+StopLogin		CHAR(1) NULL
+);
+
+INSERT INTO Users (UserEmail, User_fullname, User_Password, User_Type, Status,  Inactive_status ) VALUES
+('admin@fyp.com','Admin Account',HASHBYTES('SHA1', 'password0'),'A','Active','N'),
+('staff@fyp.com','Staff Account',HASHBYTES('SHA1', 'password1'),'S','Active','N'),
+('customer@fyp.com','FypCustomer',HASHBYTES('SHA1', 'password2'),'C','Active','N'),
+('customer2@fyp.com','Customer Account',HASHBYTES('SHA1', 'password2'),'C','Active','N'),
+('customer3@fyp.com','Customer Account',HASHBYTES('SHA1', 'password2'),'C','Active','N'),
+('John@gmail.com','John Tan',HASHBYTES('SHA1', 'password'),'C','Active','N'),
+('amanda@gmail.com','Amanda Goh',HASHBYTES('SHA1', 'password'),'C','Active','N'),
+('sofia@gmail.com','Sofia',HASHBYTES('SHA1', 'password'),'C','Active','N'),
+('jenny@gmail.com','Jenny Lee',HASHBYTES('SHA1', 'password'),'C','Active','N'),
+('customer4@fyp.com','Customer Account',HASHBYTES('SHA1', 'password2'),'C','Inactive','N');
+
+
+
+
+CREATE TABLE Customer 
+(
+  Customer_id			INT PRIMARY KEY IDENTITY,
+  CustomerNo			INT NOT NULL,
+  Date_of_birth			DATETIME NOT NULL,
+  Customer_Address		VARCHAR(200) NOT NULL,
+  Birthday_discount_used	DATE NULL,
+  UserEmail                   VARCHAR(45) NOT NULL,
+
+CONSTRAINT fk1 FOREIGN KEY(UserEmail) REFERENCES Users(UserEmail)
+);
+
+
+INSERT INTO Customer (CustomerNo,Date_of_birth,Customer_Address,Birthday_discount_used,UserEmail) VALUES 
+(97123546, '1985-06-21', 'Choa chu kang st 65','2019-06-30','customer@fyp.com'),
+(87643457, '1995-03-15', 'Blk 154 Tampines st 12',NULL,'customer2@fyp.com'), 
+(93643457, '1998-12-02', 'Blk 200 Bedok st 6','2019-03-31','customer3@fyp.com'), 
+(87643457, '1989-09-25', 'Blk 154 Tampines st 12',NULL,'John@gmail.com'), 
+(93643457, '1988-12-02', 'Blk 200 Bedok st 6','2019-03-31','amanda@gmail.com'), 
+(87603457, '1994-01-19', 'Blk 154 Tampines st 12',NULL,'sofia@gmail.com'), 
+(93643357, '1998-04-02', 'Blk 200 Bedok st 6','2019-03-31','jenny@gmail.com'), 
+(99045742, '2003-06-28','Blk 563A Jurong east',NULL,'customer4@fyp.com');
+
+
+CREATE TABLE Promotion_discount 
+(
+   Promotion_discount_id			INT IDENTITY PRIMARY KEY,
+   Promotion_discount_Description	VARCHAR(100) NOT NULL,
+   Promotion_percentage			INT NOT NULL,
+   Promotion_start_date		DATE NOT NULL,
+   Promotion_end_date		DATE NOT NULL
+);
+SET IDENTITY_INSERT Promotion_discount ON;
+INSERT INTO Promotion_discount(Promotion_discount_id, Promotion_discount_Description, Promotion_percentage, Promotion_start_date, Promotion_end_date) VALUES
+(1299,'10% off Total order on Christmas Eve and Christmas Day 2019',10,'2019-12-24','2019-12-25'),
+(1289,'10% off Total order for New Year’s 2020',10,'2020-01-01','2020-01-31');
+SET IDENTITY_INSERT Promotion_discount OFF;
+
+CREATE TABLE Menu_item
+(
+   Menu_itemid                              INT IDENTITY PRIMARY KEY,
+   Menu_itemDescription  	VARCHAR(45) NOT NULL,
+   Menu_itemPrice              	FLOAT NOT NULL,
+   Menu_itemPicture          	VARCHAR(70)   NOT NULL,
+   Menu_item_category_id	INT NOT NULL,
+
+   );
+
+SET IDENTITY_INSERT Menu_item ON;
+INSERT INTO Menu_item (Menu_itemid, Menu_itemDescription, Menu_itemPrice, Menu_itemPicture,Menu_item_category_id) VALUES
+(00000001, 'Chicken Burger', 3.00, 'chicken burger ala carte.jpg', 20000001),
+(00000002, 'Fish Burger', 2.80, 'fish burger ala carte.jpg', 20000001),
+(00000003, 'Beef Burger', 3.30, 'beef burger ala carte.jpg', 20000001),
+(00000004, 'Cheese Burger', 3.00, 'cheese burger ala carte.jpg', 20000001),
+(00000005, 'Chicken Wrap', 3.20, 'chicken wrap ala carte.jpg', 20000001),
+(00000006, 'Fish Sandwich', 3.00, 'fish sandwich ala carte.jpg', 20000001),
+(00000007, '2 pcs Chicken', 3.00, '2 pcs chicken ala carte.jpg', 20000001),
+(00000008, 'Ebi Burger', 3.00, 'ebi burger ala carte.jpg', 20000001),
+(00000009, 'Chicken Nuggets', 4.00, '6 pcs nuggets.jpg', 20000002),
+(00000010, 'Chicken Drumlets', 4.00, 'drumlets.jpg', 20000002),
+(00000011, 'French Fries', 2.90, 'french fries.jpg', 20000002),
+(00000012, 'Onion Rings', 2.70, 'onion rings.jpg', 20000002),
+(00000013, 'Salad', 3.00, 'salad.jpg', 20000002),
+(00000014, 'Cheese Fries', 2.80, 'cheese fries.jpg', 20000002),
+(00000015, 'Vanilla Ice Cream Cone', 0.80, 'vanilla ice cream.jpg', 20000003),
+(00000016, 'Chocolate Ice Cream Cone', 1.00, 'chocolate ice cream.jpg', 20000003),
+(00000017, 'Strawberry Ice Cream Cone', 1.00, 'strawberry ice cream.jpg', 20000003),
+(00000018, 'Apple Pie ', 1.10, 'apple pie.jpg', 20000003),
+(00000019, 'Cheese Cake', 3.50, 'cheesecake.jpg', 20000003),
+(00000020, 'Oreo Cheesecake', 4.00, 'oreo cheesecake.jpg', 20000003),
+(00000021, 'Red Velvet Cake', 4.00, 'red velvet cake.jpg', 20000003),
+(00000022, 'Chocolate Cake', 4.00, 'chocolate cake.jpg', 20000003),
+(00000023, 'Coke', 1.80, 'coke.jpg', 20000004),
+(00000024, 'Iced Lemon Tea', 1.80, 'iced lemon tea.jpg', 20000004),
+(00000025, 'Tea', 1.50, 'tea.jpg', 20000004),
+(00000026, 'Coffee', 1.50, 'coffee.jpg', 20000004),
+(00000027, 'Orange Juice', 1.60, 'orange juice.jpg', 20000004),
+(00000028, 'Sprite', 1.80, 'sprite.jpg', 20000004),
+(00000029, 'Water Bottle', 1.30, 'dasani.jpg', 20000004),
+(00000030, 'Iced Milo', 1.80, 'iced milo.jpg', 20000004);
+SET IDENTITY_INSERT Menu_item OFF;
+
+CREATE TABLE Set_meal 
+(
+   Set_meal_id			INT IDENTITY PRIMARY KEY,
+   Set_meal_description		VARCHAR(45) NOT NULL,
+   Menu_itemid1         	          	INT NOT NULL,
+   Menu_itemid2         	          	INT NOT NULL,
+   Set_meal_price		FLOAT NOT NULL,
+   Set_meal_picture          	VARCHAR(70)   NOT NULL,
+);
+
+SET IDENTITY_INSERT Set_meal ON;
+INSERT INTO Set_meal(Set_meal_id,Set_meal_description,Menu_itemid1,Menu_itemid2,Set_meal_price,Set_meal_picture) VALUES
+(300000001,'Chicken Burger with Apple Pie',00000001,00000018,5.00,'chicken burger with apple pie.PNG'),
+(300000002,'Fish Burger with Iced Lemon Tea',00000002,00000024,4.80,'fish burger with iced lemon tea.PNG'),
+(300000003,'Drumlets with Coke',00000010,00000023,5.30,'drumlets with coke.PNG'),
+(300000004,'Salad with Water',00000013,00000029,3.50,'salad with water.PNG'),
+(300000005,'Ebi Burger with Strawberry Ice Cream',00000008,00000017,4.50,'ebi burger with strawberry ice cream.PNG'),
+(300000006,'Chicken Nuggets with Oreo Cheesecake',00000009,00000020,6.00,'chicken nuggets with oreo cheesecake.PNG'),
+(300000007,'2 pc Chicken with Orange Juice',00000007,00000027,5.00,'2pc chicken with orange juice.PNG'),
+(300000008,'Cheesecake with Hot Tea',00000019,00000025,4.00,'cheesecake with tea.PNG'),
+(300000009,'Onion Rings with Hot Coffee',00000012,00000026,3.50,'onion rings with coffee.PNG'),
+(300000010,'Cheeseburger with Vanilla Ice Cream',00000004,00000015,3.00,'cheese burger with vanilla ice cream.PNG'),
+(300000011,'Chicken Wrap with Chocolate Ice Cream',00000004,00000015,5.50,'chicken wrap with chocolate ice cream.PNG'),
+(300000012,'Fish Sandwich with Fries',00000006,00000011,6.50,'fish sandwich with fries.PNG'),
+(300000013,'Red Velvet Cake with Sprite',00000021,00000028,5.00,'red velvet cake with sprite.PNG'),
+(300000014,'Chocolate Cake with Iced Milo',00000022,00000030,5.50,'chocolate cake with iced milo.PNG');
+SET IDENTITY_INSERT Set_meal OFF;
+
+CREATE TABLE Orders (
+   Order_id				INT PRIMARY KEY IDENTITY, 
+   Order_Date			DATE NOT NULL, 
+   Order_Time			VARCHAR (45) NOT NULL, 
+   Order_Status			VARCHAR(45) NOT NULL,
+   Order_price			FLOAT NOT NULL,
+   UserEmail           VARCHAR(45) NOT NULL,
+   Promotion_discount_id INT NULL,
+
+CONSTRAINT fk2 FOREIGN KEY(UserEmail) REFERENCES Users(UserEmail),
+CONSTRAINT fk3 FOREIGN KEY(Promotion_discount_id) REFERENCES      Promotion_Discount(Promotion_discount_id),
+);
+
+INSERT INTO Orders (Order_Date,Order_Time,Order_Status,Order_price,UserEmail) VALUES
+('2020-02-03','13:24','Delivered',5.00,'customer@fyp.com'),
+('2020-01-20','20:42','Preparing',2.90,'customer@fyp.com'),
+('2020-06-14','17:29','Delivering',5.00,'customer2@fyp.com'),
+('2020-01-29','07:22','Preparing',2.90,'customer2@fyp.com'),
+('2020-11-04','13:24','Delivering',5.00,'jenny@gmail.com'),
+('2020-03-13','20:42','Preparing',2.90,'amanda@gmail.com'),
+('2019-06-14','17:29','Delivering',5.00,'john@gmail.com'),
+('2020-11-29','07:22','Pending',2.90,'sofia@gmail.com'),
+('2019-12-27','09:14','Pending',1.50,'customer3@fyp.com');
+
+
+CREATE TABLE Order_detail 
+(
+   Order_detail_id		INT IDENTITY PRIMARY KEY,
+   Quantity			INT NOT NULL,
+   Order_item_number		INT NOT NULL,
+   Is_set_meal			CHAR(1) NOT NULL,
+   Order_id			INT NOT NULL,
+   Menu_itemid			INT NULL,
+   Set_meal_id			INT NULL,
+
+
+CONSTRAINT fk5 FOREIGN KEY(Order_id) REFERENCES Orders(Order_id),
+CONSTRAINT fK6 FOREIGN KEY(Menu_itemid) REFERENCES Menu_item(Menu_itemid),
+CONSTRAINT fK8 FOREIGN KEY(Set_meal_id) REFERENCES Set_meal(Set_meal_id)
+
+);
+
+INSERT INTO Order_detail( Quantity, Order_item_number, Is_set_meal, Order_id) VALUES
+(1,0001,'Y',1),
+(1,0002,'N',2),
+(2,0001,'Y',3),
+(2,0002,'N',4),
+(1,0003,'Y',5),
+(1,0002,'N',6),
+(2,0001,'Y',7),
+(2,0002,'N',8),
+(1,0003,'Y',9);
+
+
+CREATE TABLE Payment
+(
+  Payment_id    INT IDENTITY PRIMARY KEY,
+  Payment_Type  VARCHAR(45) NOT NULL,
+  Order_id		INT NOT NULL,
+
+  CONSTRAINT fk4 FOREIGN KEY(Order_id) REFERENCES Orders(Order_id)
+
+);
+
+INSERT INTO Payment (Payment_Type, Order_id) VALUES
+('Cash', 1),
+( 'Cash', 2),
+( 'Cash', 3),
+( 'Cash', 4),
+( 'Cash', 5),
+( 'Cash', 6),
+( 'Cash', 7),
+( 'Cash', 8),
+( 'Cash', 9);
+
+
+CREATE TABLE Menu_item_category 
+(
+   Menu_item_category_id			INT IDENTITY PRIMARY KEY,
+   Menu_item_category_description		VARCHAR(45) NOT NULL
+);
+
+SET IDENTITY_INSERT Menu_item_category ON;
+INSERT INTO Menu_item_category(Menu_item_category_id, Menu_item_category_description) VALUES
+(20000001,'Ala Carte'),
+(20000002,'Sides'),
+(20000003,'Dessert'),
+(20000004,'Drink');
+SET IDENTITY_INSERT Menu_item_category OFF;

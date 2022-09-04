@@ -1,0 +1,48 @@
+﻿@model List<Menu>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<br />
+<h2 style="text-align: center"><b>All Ala Carte</b></h2>
+<div class="row">
+    @foreach (Menu row in Model)
+    {
+        <div class="col-sm-4">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <a asp-controller="Menu"
+                       asp-action="MenuDetails"
+                       asp-route-id="@row.Menu_itemid">
+                        @row.Menu_itemDescription
+                    </a>
+                </div>
+                <div class="card-body">
+                    <a asp-controller="Menu" asp-action="MenuDetails" asp-route-id="@row.Menu_itemid">
+                        <img src="/images/menu/@row.Menu_itemPicture"
+                             width="150" height="90"
+                             class="pull-left" style="padding-right: 5px;" />
+                    </a>
+                    <div>
+                        <small>
+                            @String.Format("{0:c}", @row.Menu_itemPrice)
+                            @if (User.IsInRole("C"))
+                            {
+
+                                <a asp-controller="Order"
+                                   asp-action="CreateMenuitem"
+                                   asp-route-id="@row.Menu_itemid">
+                                    <button ng-if="!deal.ShowCustomize" class="btn btn-p btn-lg btn-block" ng-click="addToOrder()" data-ga-click-event-tracker="true" data-ga-event-name="ADD TO ORDER+ Click" data-ga-event-value="{{deal.MenuItem}}">ADD TO ORDER</button>
+                                </a>
+                            }
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,103 @@
+﻿@model Menu
+
+<div>
+
+    <br />
+    <div class="form-group row">
+        <div class="offset-sm-2"><h2><b>@Model.Menu_itemDescription</b></h2></div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-5">
+            <img id="ImgPhoto" src="/Images/Menu/@Model.Menu_itemPicture" style="width:400px;" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" for="Menu_itemPrice">Price :</label>
+        <div class="col-sm-5">
+            <input type="text" asp-for="Menu_itemPrice" class="form-control" readonly />
+        </div>
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (User.IsInRole("C"))
+        {
+            @if (Model.Menu_item_category_id.Equals(20000001))
+            {
+                <a asp-controller="Menu" asp-action="AlaCarte">
+                    <u> Back </u>
+                </a>
+            }
+
+            else if (Model.Menu_item_category_id.Equals(20000002))
+            {
+                <a asp-controller="Menu" asp-action="Sides">
+                    <u> Back </u>
+                </a>
+            }
+
+            else if (Model.Menu_item_category_id.Equals(20000003))
+            {
+                <a asp-controller="Menu" asp-action="Desserts">
+                    <u> Back </u>
+                </a>
+            }
+
+            else
+            {
+                <a asp-controller="Menu" asp-action="Drinks">
+                    <u> Back </u>
+                </a>
+            }
+
+        }
+
+        else if (User.IsInRole("A"))
+        {
+            <a asp-controller="Menu" asp-action="ListMenu">
+                <u> Back </u>
+            </a>
+        }
+
+        else if (User.IsInRole("S"))
+        {
+            <a asp-controller="Menu" asp-action="ListMenu">
+                <u> Back </u>
+            </a>
+        }
+
+    }
+
+    else
+    {
+        @if (Model.Menu_item_category_id.Equals(20000001))
+        {
+            <a asp-controller="Menu" asp-action="AlaCarte">
+                <u> Back </u>
+            </a>
+        }
+
+        else if (Model.Menu_item_category_id.Equals(20000002))
+        {
+            <a asp-controller="Menu" asp-action="Sides">
+                <u> Back </u>
+            </a>
+        }
+
+        else if (Model.Menu_item_category_id.Equals(20000003))
+        {
+            <a asp-controller="Menu" asp-action="Desserts">
+                <u> Back </u>
+            </a>
+        }
+
+        else
+        {
+            <a asp-controller="Menu" asp-action="Drinks">
+                <u> Back </u>
+            </a>
+        }
+    }
+</div>

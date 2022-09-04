@@ -1,0 +1,102 @@
+﻿@model VisitorRegistration
+
+
+<form asp-controller="Admin"
+      asp-action="UpdateUserInfo"
+      method="post">
+
+    <br />
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6 ">
+            <h2><b>Update User Record</b></h2>
+        </div>
+    </div>
+
+
+    <input type="text" asp-for="UserEmail" hidden />
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_fullname">Full Name :</label>
+        <div class="col-sm-4">
+            <input type="text" placeholder="Enter your Fullname" asp-for="User_fullname" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_fullname" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_Password">Password :</label>
+        <div class="col-sm-4">
+            <input type="password" placeholder="Enter your Password" asp-for="User_Password" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_Password2">Re-enter Password :</label>
+        <div class="col-sm-4">
+            <input type="password" placeholder="Re-enter your Password to confirm" asp-for="User_Password2" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_Password2" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+    <input type="text" asp-for="User_type" hidden />
+
+
+
+    @*<div class="form-group row">
+            <label for="Status" class="control-label col-sm-2">Status</label>
+            <div class="col-sm-4">
+                <select id="Status" name="Status" class="form-control"
+                <option value="">-- Select One --</option>
+                <option value="">-- Select One --</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>*@
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Status">Status :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Status" class="form-control" readonly />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+    <div class="offset-sm-2 col-sm-4">
+        <h5>
+            @if (User.IsInRole("A"))
+            {
+                //Controller & View for the page u want to redirect to after clicking submit
+                <a asp-controller="Admin" asp-action="Users"><input type="submit" class="btn btn-warning fa" value="Update Information" /></a>
+
+            }
+        </h5>
+    </div>
+    <a asp-controller="Admin" asp-action="Users"> <u>Back</u> </a>
+    @if (TempData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-6">
+                <div class="alert alert-@TempData["MsgType"]">
+                    @TempData["Message"]
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+</form>

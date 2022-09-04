@@ -1,0 +1,114 @@
+﻿@{
+    // TODO: L11 Task 5b - Include DataTables CSS and JS, write code to make the table searchable and sortable
+}
+@section MoreScripts {
+
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#jsTblUsr').DataTable({
+                ordering: true,
+                paging: true,
+                searching: true,
+                info: true,
+                lengthChange: false,
+                pageLength: 10
+            });
+        });
+    </script>
+}
+
+
+@model DataRowCollection
+
+    <div class="col-sm-12" style="vertical-align:middle; text-align: center;">
+        <p><h2><u><b><span style="color:black">Users</span></b></u></h2></p>
+    </div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<div>
+
+    @{
+        // TODO: L11 Task 5a - Give the Table an ID to be used with DataTables
+    }
+    <table id="jsTblUsr" class="table table-condensed table-hover table-bordered" style="border:double">
+        <thead style="text-align:center">
+
+            <tr style="background-color:navajowhite">
+                <th scope="col">User Email</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">User Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Password</th>
+                @if (User.IsInRole("A"))
+                {
+                    <th scope="col">Action</th>
+                }
+                @if (User.IsInRole("A"))
+                {
+                    <th scope="col">Inactivate Users</th>
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (DataRow row in Model)
+            {
+            <tr style="background-color:none">
+                <td>@row["UserEmail"]</td>
+                <td>@row["User_fullname"]</td>
+                <td style="text-align: center;">@row["User_type"]</td>
+                <td style="text-align: center;">
+                    @if (row["Status"].Equals("Inactive"))
+
+                    {
+                        <b style="color:red">@row["Status"]</b>
+                    }
+
+                    else
+                    {
+                        <b style="color:green">@row["Status"]</b>
+                    }
+                <td style="text-align: center; color:red"><b>hidden</b></td>
+
+                @if (User.IsInRole("A"))
+                {
+                    <td style="text-align: center;">
+                        <a asp-controller="Admin"
+                           asp-action="UpdateUserInfo"
+                           asp-route-id="@row["UserEmail"]">
+                            <i class=" fa fa-pencil"></i>
+                        </a>
+
+                    </td>
+
+                }
+
+                @if (User.IsInRole("A"))
+                {
+                    <td style="text-align: center;">
+                        <a asp-controller="Admin"
+                           asp-action="InactivateUser"
+                           asp-route-id="@row["UserEmail"]">
+                            <i class=" fa fa-pencil"></i>
+                        </a>
+
+                    </td>
+
+                }
+            </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
+

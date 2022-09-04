@@ -1,0 +1,76 @@
+﻿@model VisitorRegistration
+
+
+<form asp-controller="Customer"
+      asp-action="AccountUpdate"
+      method="post">
+
+    <br />
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <h2><b>Update Account Detail</b></h2>
+        </div>
+    </div>
+
+    <input type="text" asp-for="UserEmail" hidden />
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_fullname">Name :</label>
+        <div class="col-sm-4">
+            <input type="text" placeholder="Enter your fullname" asp-for="User_fullname" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_fullname" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_Password">New or current Password :</label>
+        <div class="col-sm-4">
+            <input type="password" placeholder="Enter New or current Password" asp-for="User_Password" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_Password" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="User_Password2">Re-enter Password :</label>
+        <div class="col-sm-4">
+            <input type="password" placeholder="Re-enter your Password to confirm" asp-for="User_Password2" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="User_Password2" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <a asp-controller="Customer" asp-action="AccountUpdate"
+               onclick='return confirm("Are you sure you want to save changes ?")'>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </a>
+        </div>
+    </div>
+
+    <h5><a href="AccountDetail">Back</a></h5>
+
+
+
+    @if (ViewData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <div class="alert alert-@ViewData["MsgType"]">
+                    <text>@Html.Raw(ViewData["Message"])</text>
+                </div>
+            </div>
+        </div>
+    }
+
+</form>
+

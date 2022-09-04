@@ -1,0 +1,48 @@
+﻿@model List<SetMeal>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-@TempData["MsgType"]">
+        @TempData["Message"]
+    </div>
+}
+
+<br />
+<h2 style="text-align: center"><b>All Set Meals</b></h2>
+<div class="row">
+    @foreach (SetMeal row in Model)
+    {
+        <div class="col-sm-4">
+            <div class="card mt-2">
+                <div class="card-header">
+                    <a asp-controller="Menu"
+                       asp-action="SetDetails"
+                       asp-route-id="@row.Set_meal_id">
+                        @row.Set_meal_description
+                    </a>
+                </div>
+                <div class="card-body">
+                    <a asp-controller="Menu" asp-action="SetDetails" asp-route-id="@row.Set_meal_id">
+                        <img src="/images/menu/@row.Set_meal_picture"
+                             width="150" height="90"
+                             class="pull-left" style="padding-right: 5px;" />
+                    </a>
+                    <div>
+                        <small>
+                            @String.Format("{0:c}", @row.Set_meal_price)
+                            @if (User.IsInRole("C"))
+                            {
+
+                                <a asp-controller="Order"
+                                   asp-action="CreateSetmeal"
+                                   asp-route-id="@row.Set_meal_id">
+                                    <button ng-if="!deal.ShowCustomize" class="btn btn-p btn-lg btn-block" ng-click="addToOrder()" data-ga-click-event-tracker="true" data-ga-event-name="ADD TO ORDER+ Click" data-ga-event-value="{{deal.MenuItem}}">ADD TO ORDER</button>
+                                </a>
+                            }
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

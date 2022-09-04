@@ -1,0 +1,78 @@
+@model Menu
+
+<form method="post"
+      asp-controller="Menu"
+      asp-action="CreateMenu"
+      enctype="multipart/form-data">
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-4">
+            @*<div class="offset-sm-2 col-sm-6">*@
+            <br /> <h2><b>Add Menu Item</b></h2>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Menu_itemDescription">Item Name :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Menu_itemDescription" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="Menu_itemDescription" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Menu_itemPrice">Price :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="Menu_itemPrice" class="form-control" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="Menu_itemPrice" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Menu_item_category_id">Category :</label>
+        <div class="col-sm-3">
+            <select class="form-control dropdown" asp-for="Menu_item_category_id">
+                @foreach (Category row in ViewData["Category"] as List<Category>)
+                {
+                    <option value="@row.Menu_item_category_id">
+                        @row.Menu_item_category_description.ToString()
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-2" asp-for="Photo">Photo :</label>
+        <div class="col-sm-4">
+            <input type="file" asp-for="Photo" class="form-control-file" />
+        </div>
+        <div class="col-sm-3">
+            <span asp-validation-for="Photo" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="offset-sm-2 col-sm-6">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+
+    @if (ViewData["Message"] != null)
+    {
+        <div class="form-group row">
+            <div class="offset-sm-2 col-sm-6">
+                <div class="alert alert-@ViewData["MsgType"]">
+                    <text>@ViewData["Message"]</text>
+                </div>
+            </div>
+        </div>
+    }
+
+    <a href="/Menu/ListMenu">Back to list of Menu Items</a>
+
+</form>

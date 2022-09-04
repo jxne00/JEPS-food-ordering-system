@@ -1,0 +1,79 @@
+@model UserLogin
+
+<form asp-controller="Account"
+      asp-action="Login"
+      method="post">
+
+    <content>
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <br />
+                <h2><i class="fa fa-user"></i><b> Please Login</b></h2>
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+            <label class="control-label col-sm-1" asp-for="UserEmail"><b>E-mail :</b></label>
+            <div class="col-sm-4">
+                <input type="text" placeholder="Enter your E-mail" asp-for="UserEmail" class="form-control" />
+            </div>
+            <div class="col-sm-4">
+                <span asp-validation-for="UserEmail" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="control-label col-sm-1" asp-for="User_Password"><b>Password :</b></label>
+            <div class="col-sm-4">
+                <input type="password" placeholder="Enter your Password" asp-for="User_Password" class="form-control" />
+            </div>
+            <div class="col-sm-3">
+                <span asp-validation-for="User_Password" class="text-danger"></span>
+            </div>
+        </div>
+
+        @{
+            //Remember Me check box
+        }
+        <div class="form-group row">
+
+            <div class="offset-sm-1 col-sm-4">
+
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" asp-for="RememberMe" />
+                    <label class="form-check-label" asp-for="RememberMe">
+                        Remember Me
+                    </label>
+                </div>
+                @* ---- CLEAR ALL TEXT BUTTON ------
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input style="height:30px; margin-top:2px" type="reset" value="clear" />*@
+
+            </div>
+
+        </div>
+
+        @if (ViewData["Message"] != null)
+        {
+            <div class="form-group row">
+                <div class="alert alert-@ViewData["MsgType"]">
+                    <text>@ViewData["Message"]</text>
+                </div>
+            </div>
+        }
+        <div class="offset-sm-1 col-sm-4">
+            <div class="form-group row">
+                <input type="submit" class="btn btn-primary" value="Login" /><a class="col-sm-8" href="Register">Register for an account?</a>
+            </div>
+
+        </div>
+    </content>
+
+</form>
+@*<a asp-controller="Menu" asp-action="Visitor"><b>Back to Menu</b></a>*@
+
+

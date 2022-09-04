@@ -1,0 +1,60 @@
+﻿@model VisitorRegistration
+
+<div>
+    <div class="col-sm-1 col-sm-6">
+        <h2 style="margin-bottom:5px">
+            <img style="border-radius:50% ;margin-bottom:40px" src="~/images/profile.png" width="100" height="100" />
+            &nbsp;&nbsp;
+            <b style="font-family:'Comic Sans MS'">Account Details</b>
+        </h2>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-1" for="User_fullname">Name :</label>
+        <div class="col-sm-4">
+            <input type="text" asp-for="User_fullname" class="form-control" style="background-color:gainsboro" readonly />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-1" for="User_Password">Password :</label>
+        <div class="col-sm-4">
+            <input type="text" value="Hidden" class="form-control" style="background-color:gainsboro; color:darkred" readonly />
+        </div>
+    </div>
+
+    <input type="text" asp-for="User_Password" hidden />
+    <input type="text" asp-for="UserEmail" hidden />
+    <input type="text" asp-for="User_type" hidden />
+
+
+
+    <div class="col-sm-6" style="margin-left:300px">
+        <h5>
+            @if (User.IsInRole("C"))
+            {
+                <a asp-controller="Customer" asp-action="AccountUpdate"><input type="submit" class="btn btn-warning fa" value="Edit Details" /></a>
+
+            }
+        </h5>
+    </div>
+    <br />
+    <a asp-controller="Customer" asp-action="AllDetails"> <u>View All Details</u> </a>
+</div>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="form-group row">
+        <div class="col-sm-6">
+            <div class="alert alert-@ViewData["MsgType"]">
+                <text>@Html.Raw(ViewData["Message"])</text>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
