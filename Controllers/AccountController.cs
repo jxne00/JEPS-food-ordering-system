@@ -14,19 +14,18 @@ namespace FYP.Controllers
 {
     public class AccountController : Controller
     {
-
-        private const string LOGIN_SQL =
-           @"SELECT * FROM Users 
-            WHERE UserEmail = '{0}' 
-              AND User_Password = HASHBYTES('SHA1', '{1}')";
+        private const string LOGIN_SQL = @"SELECT * FROM Users 
+                                           WHERE UserEmail = '{0}' 
+                                           AND User_Password = HASHBYTES('SHA1', '{1}')";
 
         //setting last login date whenever user logins
-        private const string LASTLOGIN_SQL =
-           @"UPDATE Users SET LastLogin=GETDATE() WHERE UserEmail='{0}'";
+        private const string LASTLOGIN_SQL = @"UPDATE Users 
+                                               SET LastLogin = GETDATE() 
+                                               WHERE UserEmail = '{0}'";
 
         private const string STOPLOGIN = @"SELECT * FROM Users 
-            WHERE UserEmail = '{0}'
-              AND StopLogin = 'Y'";
+                                           WHERE UserEmail = '{0}'
+                                           AND StopLogin = 'Y'";
 
         //User role & user's name field in database 
         private const string ROLE_COL = "User_type";
@@ -45,35 +44,30 @@ namespace FYP.Controllers
         #region "About us, contact us, afterlogin,stoplogin, forbidden page"
         // ABOUT PAGE
         [AllowAnonymous]
-        public IActionResult About()
-        {
+        public IActionResult About() {
             return View();
         }
 
         //CONTACT US PAGE
         [AllowAnonymous]
-        public IActionResult ContactUs()
-        {
+        public IActionResult ContactUs() {
             return View();
         }
 
         // LOGIN DISABLED PAGE
         [AllowAnonymous]
-        public IActionResult StopLogin()
-        {
+        public IActionResult StopLogin() {
             return View();
         }
 
         [Authorize]
-        public IActionResult AfterLogin()
-        {
+        public IActionResult AfterLogin() {
             return View();
         }        
         
         // Displays FORBIDDEN page if user does not have permission to view that URL (anyone)
         [AllowAnonymous]
-        public IActionResult Forbidden()
-        {
+        public IActionResult Forbidden() {
             return View();
         }
         #endregion
@@ -84,7 +78,6 @@ namespace FYP.Controllers
         {
             TempData["ReturnUrl"] = returnUrl;
             return View(LOGIN_VIEW);
-
         }
 
         //LOGIN PAGE
@@ -97,7 +90,6 @@ namespace FYP.Controllers
                 ViewData["Message"] = "Incorrect Email or Password Entered or your account has been deleted. Please try again.";
                 ViewData["MsgType"] = "danger";
                 return View(LOGIN_VIEW);
-
             }
 
             else if (!StopLogin(user.UserEmail, user.StopLogin))
@@ -125,7 +117,6 @@ namespace FYP.Controllers
                     string returnUrl = TempData["returnUrl"].ToString();
                     if (Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
-
                 }
 
 
@@ -186,8 +177,6 @@ namespace FYP.Controllers
             return true;
         }
 
-
-
         // REGISTER AS CUSTOMER (Information for Users table in database)
         [AllowAnonymous]
         public IActionResult Register()
@@ -208,11 +197,10 @@ namespace FYP.Controllers
 
             else
             {
-                string insert =
-                   @"INSERT INTO Users (UserEmail, User_fullname, User_Password, User_type, Status, Inactive_status) VALUES
-                 ('{0}', '{1}', HASHBYTES('SHA1', '{2}'),'C','Active','N')";
-
                 // User_type set to 'C' default as this form is only to register customers
+                string insert =
+                   @"INSERT INTO Users (UserEmail, User_fullname, User_Password, User_type, Status, Inactive_status) 
+                     VALUES ('{0}', '{1}', HASHBYTES('SHA1', '{2}'),'C','Active','N')";
 
                 if (DBUtl.ExecSQL(insert, usr.UserEmail, usr.User_fullname, usr.User_Password, usr.User_type,usr.Status,usr.Inactive_status) == 1)
                 {
