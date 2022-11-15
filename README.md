@@ -1,9 +1,6 @@
-# JEPS
-Codes for JEPS Food Ordering System (RP FYP)
-This Food Ordering System was made for the Final Year Project in Republic Polytechnic.
+# JEPS Food Ordering System
 
-Running on local host:
-- Navigate to E.g. http://localhost:62598/account/login to access the login page
+- Navigate to localhost:62598/account/login to access the login page.
 
 Screenshots:
 ![image](https://user-images.githubusercontent.com/86581908/188305743-f4279557-f6ce-4eb1-9e61-2739a0db2bcf.png)
