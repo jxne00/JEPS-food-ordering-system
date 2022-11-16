@@ -1,7 +1,5 @@
 # JEPS Food Ordering System
 
-- Navigate to localhost:62598/account/login to access the login page.
-
 Screenshots:
 ![image](https://user-images.githubusercontent.com/86581908/188305743-f4279557-f6ce-4eb1-9e61-2739a0db2bcf.png)
 ![image](https://user-images.githubusercontent.com/86581908/188305928-e674fda6-64cc-443b-93f3-a505e0fdeb6b.png)
